@@ -8,7 +8,7 @@
             <p>First Number</p>
         </div>
         <div class="col-md-4">
-            <input placeholder="Enter First Number" @bind="@num1" />
+            <input id="FirstColumn" placeholder="Enter First Number" @bind="@num1" />
         </div>
     </div>
     <br />
@@ -17,7 +17,7 @@
             <p>Second Number</p>
         </div>
         <div class="col-md-4">
-            <input placeholder="Enter Second Number" @bind="@num2" />
+            <input id="SecondColumn" placeholder="Enter Second Number" @bind="@num2" />
         </div>
     </div>
     <br />
@@ -26,7 +26,7 @@
             <p>Result</p>
         </div>
         <div class="col-md-4">
-            <input readonly @bind="@finalresult" />
+            <input id="FinalResult" readonly @bind="@finalresult"/>
         </div>
     </div>
     <br />
@@ -42,6 +42,15 @@
         </div>
         <div class="col-md-2">
             <button @onclick="DivideNumbers" class="btn btn-info">Divide (/)</button>
+        </div>
+        <div class="col-md-2">
+            <button id="SquareRoot" @onclick="SquareNumber" class="btn btn-info">Square (sqr)</button>
+        </div>
+        <div class="col-md-2">
+            <button id="ModulusNumber" @onclick="Modulus" class="btn btn-info">Square (%)</button>
+        </div>
+        <div class="col-md-2">
+            <button id="PowerOf" @onclick="PowerOf" class="btn btn-info">Square (Power)</button>
         </div>
     </div>
 </div>
@@ -72,5 +81,42 @@
         {
             finalresult = "Cannot Divide by Zero";
         }
+    }
+    void SquareNumber()
+    {
+        if(Convert.ToDouble(num1) != 0)
+        {
+            finalresult = Math.Sqrt(double.Parse(num1)).ToString();
+        }
+        else
+        {
+            finalresult = "Invalid number";
+        }
+
+    }
+    void PowerOf()
+    {
+        if (Convert.ToDouble(num1) != 0 && Convert.ToDouble(num2) != 0)
+        {
+            finalresult = Math.Pow(double.Parse(num1), double.Parse(num2)).ToString();
+        }
+        else
+        {
+            finalresult = "Invalid numbers";
+        }
+
+
+    }
+    void Modulus()
+    {
+        if (Convert.ToDouble(num1) != 0 && Convert.ToDouble(num2) != 0)
+        {
+            finalresult = (double.Parse(num1) % double.Parse(num2)).ToString();
+        }
+        else
+        {
+            finalresult = "Invalid numbers";
+        }
+
     }
 }
