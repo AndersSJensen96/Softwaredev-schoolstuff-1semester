@@ -8,12 +8,15 @@ namespace BankAPI.Models
 {
     public abstract class Customer : ICustomer
     {
-        public Customer()
+        public Customer(int id, string name, string email, int phone)
         {
-
+            Id = id;
+            Name = name;
+            Email = email;
+            Phone = phone;
         }
 
-        private string _id;
+        private int _id;
 
         private string _name;
 
@@ -25,7 +28,7 @@ namespace BankAPI.Models
 
         private List<ICreditCard> _creditCards;
 
-        public string Id
+        public int Id
         {
             get { return _id; }
             private set { _id = value; }

@@ -8,9 +8,11 @@ namespace BankAPI.Models
 {
     public abstract class Account : IAccount
     {
-        public Account()
+        public Account(string accountNumber, string registerNumber)
         {
-
+            _balance = 0.0;
+            AccountNumber = accountNumber;
+            RegisterNumber = registerNumber;
         }
 
         private double _balance;

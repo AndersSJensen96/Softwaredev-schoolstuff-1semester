@@ -7,7 +7,7 @@ namespace BankAPI.Models.Interfaces
 {
     public interface ICustomer
     {
-        public string Id { get; }
+        public int Id { get; }
 
         public string Name { get; set; }
 

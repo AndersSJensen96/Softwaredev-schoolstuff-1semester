@@ -7,5 +7,8 @@ namespace BankAPI.Models.Accounts
 {
     public class NormalAccount : Account
     {
+        public NormalAccount(string accountNumber, string registerNumber) : base(accountNumber,registerNumber)
+        {}
+
     }
 }
