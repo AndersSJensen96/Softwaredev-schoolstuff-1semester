@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BankAPI.Models.Accounts
 {
-   public enum AccountEnum
+   public enum AccountType
    {
         Normal,
         Savings,

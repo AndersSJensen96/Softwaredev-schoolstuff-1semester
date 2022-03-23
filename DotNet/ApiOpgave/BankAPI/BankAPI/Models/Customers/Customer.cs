@@ -8,9 +8,8 @@ namespace BankAPI.Models
 {
     public abstract class Customer : ICustomer
     {
-        public Customer(int id, string name, string email, int phone)
+        public Customer(string name, string email, int phone)
         {
-            Id = id;
             Name = name;
             Email = email;
             Phone = phone;

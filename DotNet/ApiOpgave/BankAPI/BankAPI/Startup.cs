@@ -1,10 +1,13 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using BankAPI.Models;
+using Microsoft.EntityFrameworkCore;
+using BankAPI.Data;
+using BankAPI.Models.Interfaces;
 
 namespace BankAPI
 {
@@ -26,9 +29,12 @@ namespace BankAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BankAPI", Version = "v1" });
             });
-            
-            //DP injection services.addscoped<Interface, class>();
 
+            services.AddDbContext<BankAPIContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("BankAPIContext")));
+
+            //DP injection services.addscoped<Interface, class>();
+            services.AddSingleton<MockupClass>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

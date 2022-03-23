@@ -9,7 +9,7 @@ namespace BankAPI.Models.Customers
 {
     public class CompanyCustomer : Customer, ICompanyCustomer
     {
-        public CompanyCustomer(string cvr, int id, string name, string email, int phone) : base(id, name, email, phone)
+        public CompanyCustomer(string cvr, string name, string email, int phone) : base(name, email, phone)
         {
             CVR = cvr;
         }

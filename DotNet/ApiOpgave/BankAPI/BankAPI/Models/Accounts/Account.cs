@@ -9,7 +9,11 @@ namespace BankAPI.Models
 {
     public class Account : IAccount
     {
-        public Account(string accountNumber, string registerNumber, AccountEnum type, int owner)
+        public Account()
+        {
+
+        }
+        public Account(string accountNumber, string registerNumber, AccountType type, int owner)
         {
             _balance = 0.0;
             AccountNumber = accountNumber;
@@ -17,17 +21,28 @@ namespace BankAPI.Models
             AccountType = type;
             Owner = owner;
         }
+        public int Id { get; set; }
 
         private double _balance;
 
         public double Balance { get { return _balance; }}
 
-        public AccountEnum AccountType { get; set; }
+        public AccountType AccountType { get; set; }
 
         public string AccountNumber { get; private set; }
 
         public string RegisterNumber { get; private set; }
 
-        public int Owner { get; set; }
+        public int Owner { get; private set; }
+
+        public void Deposit(double amount)
+        {
+            _balance += amount;
+        }
+
+        public void Withdraw(double amount)
+        {
+            _balance -= amount;
+        }
     }
 }
