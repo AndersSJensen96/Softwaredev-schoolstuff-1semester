@@ -8,6 +8,9 @@ using BankAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using BankAPI.Data;
 using BankAPI.Models.Interfaces;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BankAPI
 {
@@ -35,6 +38,20 @@ namespace BankAPI
 
             //DP injection services.addscoped<Interface, class>();
             services.AddSingleton<MockupClass>();
+
+
+            byte[] key = Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +68,7 @@ namespace BankAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

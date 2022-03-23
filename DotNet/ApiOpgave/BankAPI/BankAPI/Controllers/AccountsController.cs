@@ -8,9 +8,11 @@ using BankAPI.Models.Interfaces;
 using BankAPIDTO.DTO;
 using BankAPIDTO.DTO.AccountDTO;
 using BankAPI.Models.Accounts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
