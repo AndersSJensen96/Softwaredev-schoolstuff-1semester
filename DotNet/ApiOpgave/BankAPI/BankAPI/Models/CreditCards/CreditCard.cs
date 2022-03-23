@@ -16,6 +16,7 @@ namespace BankAPI.Models
             BoundAccount = account;
             ExpirationDate = expire;
         }
+        public int Id { get; set; }
 
         public string CardNumber { get; private set; }
 

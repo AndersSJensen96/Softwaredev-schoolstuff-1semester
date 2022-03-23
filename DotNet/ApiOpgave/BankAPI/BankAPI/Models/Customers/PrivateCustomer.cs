@@ -8,7 +8,7 @@ namespace BankAPI.Models.Customers
 {
     public class PrivateCustomer : Customer, IPrivateCustomer
     {
-        public PrivateCustomer(string cpr, int id, string name, string email, int phone) : base(id, name, email, phone)
+        public PrivateCustomer(string cpr,string name, string email, int phone) : base(name, email, phone)
         {
             CPR = cpr;
         }
