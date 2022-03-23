@@ -16,47 +16,16 @@ namespace BankAPI.Models
             Phone = phone;
         }
 
-        private int _id;
+        public int Id { get; set; }
 
-        private string _name;
+        public string Name { get; set; }
 
-        private string _email;
+        public string Email { get; set; }
 
-        private int _phone;
+        public int Phone { get; set; }
 
-        private List<IAccount> _accounts;
+        public List<IAccount> Accounts { get;}
 
-        private List<ICreditCard> _creditCards;
-
-        public int Id
-        {
-            get { return _id; }
-            private set { _id = value; }
-        }
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public string Email
-        {
-            get{ return _email; }
-            set { _email = value; }
-        }
-
-        public int Phone
-        {
-            get { return _phone; }
-            set { _phone = value; }
-        }
-
-        public List<IAccount> Accounts
-        {
-            get { return _accounts; }
-        }
-
-        public List<ICreditCard> creditCards { get { return _creditCards; } }
+        public List<ICreditCard> creditCards { get; }
     }
 }
