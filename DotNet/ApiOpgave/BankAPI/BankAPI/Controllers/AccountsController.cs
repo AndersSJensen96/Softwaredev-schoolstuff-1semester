@@ -34,7 +34,6 @@ namespace BankAPI.Controllers
                 .Select(x => new AccountResponseDTO {
                     AccountNumber = x.AccountNumber,
                     AccountType = (int)x.AccountType,
-                    Balance = x.Balance,
                     RegisterNumber = x.RegisterNumber
                 })
                 .ToList();
@@ -52,7 +51,6 @@ namespace BankAPI.Controllers
                 {
                     AccountNumber = x.AccountNumber,
                     AccountType = (int)x.AccountType,
-                    Balance = x.Balance,
                     RegisterNumber = x.RegisterNumber
                 })
                 .FirstOrDefault();
@@ -126,7 +124,7 @@ namespace BankAPI.Controllers
         public async Task<ActionResult<Account>> PostAccount(AccountCreateDTO account)
         {
 
-            Account newAccount = new Account(account.AccountNumber, account.RegisterNumber, (AccountType)account.AccountType, account.Owner);
+            Account newAccount = new Account(account.AccountNumber, account.RegisterNumber, (AccountType)account.AccountType, account.Owner, new List<ITransaction>());
 
             //Please kill me
             newAccount.Id = _context.Accounts.Max(x => x.Id) + 1;
@@ -134,7 +132,7 @@ namespace BankAPI.Controllers
             _context.Accounts.Add(newAccount);
             //await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAccount", new { id = newAccount.Id }, newAccount);
+            return CreatedAtAction("GetAccount", new { id = newAccount.Id }, account);
         }
 
         // DELETE: api/Accounts/5
@@ -150,7 +148,7 @@ namespace BankAPI.Controllers
             _context.Accounts.Remove(account);
             //await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool AccountExists(int id)

@@ -1,21 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BankAPI.Models.Interfaces;
+using BankAPI.Models.Transactions;
 
 namespace BankAPI.Models
 {
 
-    public abstract class Transaction : ITransaction
+    public class Transaction : ITransaction
     {
-        public Transaction()
-        {
-
-        }
-
-        public double TransferFee { get; set; }
-
         public double TransferAmount { get; set; }
+        public DateTime TransactionTime { get; set; }
+        public string ToAccountNumber { get; set; }
+        public string ToRegisterNumber { get; set; }
+        public string FromAccountNumber { get; set; }
+        public string FromRegisterNumber { get; set; }
+        public TransactionType TransactionType { get; set; }
+        public TransferType TransferType { get; set; }
     }
 }
