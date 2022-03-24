@@ -1,4 +1,5 @@
 ﻿using BankAPI.Models.Accounts;
+using System.Collections.Generic;
 
 namespace BankAPI.Models.Interfaces
 {
@@ -8,10 +9,9 @@ namespace BankAPI.Models.Interfaces
         public AccountType AccountType { get; set; }
         public string AccountNumber { get;}
         public string RegisterNumber { get;}
-        public double Balance { get; }
         public int Owner { get; }
+        public List<ITransaction> AccountTransactions { get;}
 
-        void Deposit(double amount);
-        void Withdraw(double amount);
+        public void AddTransaction(Transaction transaction);
     }
 }
