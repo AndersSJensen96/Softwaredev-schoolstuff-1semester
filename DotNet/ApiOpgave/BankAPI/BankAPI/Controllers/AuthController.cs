@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BankAPIDTO.DTO.Login;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,12 +26,35 @@ namespace BankAPI.Controllers
         {
             _config = config;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMethod(string username, string password)
+        {
+            //string token = null;
+            //if (username == this.username && password == this.password)
+            //{
+            //    //generate token
+            //    JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            //    byte[] key = Encoding.ASCII.GetBytes(_config.GetSection("AppSettings:Token").Value);
+            //    SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            //    {
+            //        Subject = new ClaimsIdentity(new Claim[]{
+            //            new Claim(ClaimTypes.NameIdentifier, username),
+            //            new Claim(ClaimTypes.Email, $"{username}@Email.com")
+            //        }),
+            //        Expires = DateTime.Now.AddDays(1),
+            //        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
+            //    };
 
-        [HttpGet("{username}/{password}")]
-        public async Task<string> Login(string username, string password)
+            //    SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            //    token = tokenHandler.WriteToken(securityToken);
+            //}
+            return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO login)
         {
             string token = null;
-            if(username == this.username && password == this.password)
+            if(login.Username == this.username && login.Password == this.password)
             {
                 //generate token
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
@@ -49,7 +73,7 @@ namespace BankAPI.Controllers
                 token = tokenHandler.WriteToken(securityToken);
             }
 
-            return token;
+            return Ok(token);
         }
     }
 }

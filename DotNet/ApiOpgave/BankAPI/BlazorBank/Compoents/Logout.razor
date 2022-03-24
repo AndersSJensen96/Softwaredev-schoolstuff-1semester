@@ -1,0 +1,12 @@
+﻿@page "/logout"
+@inject NavigationManager manager
+@inject SessionInformation session
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        session.Token = null;
+        manager.NavigateTo("login");
+    }
+}

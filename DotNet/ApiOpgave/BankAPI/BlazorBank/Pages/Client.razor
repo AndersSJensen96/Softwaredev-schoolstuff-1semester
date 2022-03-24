@@ -1,0 +1,61 @@
+﻿@page "/client"
+@inject HttpClient client
+@inject SessionInformation session
+@inject NavigationManager manager
+@using Newtonsoft.Json;
+@using BankAPIDTO.DTO.Cutomer;
+@using System.Net.Http.Headers;
+
+@if (string.IsNullOrWhiteSpace(session.Token))
+    manager.NavigateTo("login");
+
+
+<h3>Client</h3>
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Phone</td>
+                    <td>@(customer.CustomerType == 0 ? "Private":"Company")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    CustomerDTO[] customers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "api/customers");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", session.Token);
+
+        var response = await client.SendAsync(request);
+
+        string content = await response.Content.ReadAsStringAsync();
+        customers = JsonConvert.DeserializeObject<CustomerDTO[]>(content);
+    }
+
+
+
+}

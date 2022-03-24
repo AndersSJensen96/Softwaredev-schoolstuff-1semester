@@ -1,0 +1,50 @@
+﻿@page "/login"
+@inject NavigationManager manager
+@inject HttpClient client
+@inject SessionInformation session
+@using System.Diagnostics;
+@using BankAPIDTO.DTO.Login;
+@using Newtonsoft.Json;
+@using System.Text;
+<h3>Login</h3>
+<input id="username" @bind="username" name="username" type="text"/>
+<input id="password" @bind="password" type="password" name="password"/>
+<button @onclick="Authenticate">Login</button>
+@code {
+    string username;
+    string password;
+    LoginDTO dto;
+    string message;
+    private async void Authenticate()
+    {
+        dto = new LoginDTO { Username = username, Password = password };
+        HttpContent content = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
+
+
+        HttpResponseMessage response = null;
+
+        try
+        {
+            response = await client.PostAsync("api/auth", content);
+        }
+        catch(Exception e)
+        {
+            message = e.Message;
+        }
+
+
+
+
+        string token = null;
+
+        if (response.IsSuccessStatusCode)
+        {
+            token = await response.Content.ReadAsStringAsync();
+        }
+        if (token != null)
+        {
+            session.Token = token;
+            manager.NavigateTo("/client");
+        }
+    }
+}

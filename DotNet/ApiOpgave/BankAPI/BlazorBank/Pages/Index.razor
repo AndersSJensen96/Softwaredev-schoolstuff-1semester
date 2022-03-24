@@ -1,0 +1,11 @@
+﻿@page "/"
+@inject SessionInformation session
+@inject NavigationManager manager
+<h1>Hello, Welcome to new app! Yes</h1>
+
+@{       
+    if (string.IsNullOrWhiteSpace(session.Token))
+    {
+        manager.NavigateTo("login");
+    }
+}

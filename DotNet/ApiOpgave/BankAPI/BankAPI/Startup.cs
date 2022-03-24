@@ -67,7 +67,12 @@ namespace BankAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(x =>
+            {
+                x.AllowAnyMethod();
+                x.AllowAnyHeader();
+                x.AllowAnyOrigin();
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 

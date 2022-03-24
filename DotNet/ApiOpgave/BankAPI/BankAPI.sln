@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAPI", "BankAPI\BankAPI.csproj", "{E2AF4B7A-68A4-4638-AB00-729278269033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAPIDTO", "BankAPIDTO\BankAPIDTO.csproj", "{4DD56DBF-7B28-49B2-8FF0-A72672D3F392}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankAPIDTO", "BankAPIDTO\BankAPIDTO.csproj", "{4DD56DBF-7B28-49B2-8FF0-A72672D3F392}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBank", "BlazorBank\BlazorBank.csproj", "{B236AC9A-BBE0-4231-8B1A-ECBC1600C949}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4DD56DBF-7B28-49B2-8FF0-A72672D3F392}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DD56DBF-7B28-49B2-8FF0-A72672D3F392}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DD56DBF-7B28-49B2-8FF0-A72672D3F392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B236AC9A-BBE0-4231-8B1A-ECBC1600C949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B236AC9A-BBE0-4231-8B1A-ECBC1600C949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B236AC9A-BBE0-4231-8B1A-ECBC1600C949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B236AC9A-BBE0-4231-8B1A-ECBC1600C949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

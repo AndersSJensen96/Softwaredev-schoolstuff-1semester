@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BankAPI.Data;
 using BankAPI.Models.Customers;
 using Microsoft.AspNetCore.Authorization;
+using BankAPIDTO.DTO.Cutomer;
 
 namespace BankAPI.Controllers
 {
@@ -25,9 +26,9 @@ namespace BankAPI.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<IEnumerable<CustomerDTO>>> GetCustomer()
         {
-            return _context.Customers;
+            return _context.Customers.Select(x => new CustomerDTO { Name = x.Name, CustomerType = (int) x.CustomerType, Email = x.Email, Phone = x.Phone}).ToList();
         }
 
         // GET: api/Customers/5
