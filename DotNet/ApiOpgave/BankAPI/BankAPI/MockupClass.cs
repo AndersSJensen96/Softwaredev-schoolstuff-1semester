@@ -32,12 +32,12 @@ namespace BankAPI
 
            Accounts = new List<Account>
             {
-                new Account("814841804189041","243", AccountType.Normal, 1){ Id = 1},
-                new Account("251626345232134","123",AccountType.Normal, 2){ Id = 2},
-                new Account("123154634562234","253", AccountType.Normal, 3){ Id = 3},
-                new Account("123154634562234","475", AccountType.Savings, 3){ Id = 4},
-                new Account("123154634562234","357", AccountType.Savings, 4){ Id = 5},
-                new Account("123154634562234","975", AccountType.Normal, 4){ Id = 6}
+                new Account("814841804189041","243", AccountType.Normal, 1, new List<ITransaction>()){ Id = 1},
+                new Account("251626345232134","123",AccountType.Normal, 2, new List<ITransaction>()){ Id = 2},
+                new Account("123154634562234","253", AccountType.Normal, 3, new List<ITransaction>()){ Id = 3},
+                new Account("123154634562234","475", AccountType.Savings, 3, new List<ITransaction>()){ Id = 4},
+                new Account("123154634562234","357", AccountType.Savings, 4, new List<ITransaction>()){ Id = 5},
+                new Account("123154634562234","975", AccountType.Normal, 4, new List<ITransaction>()){ Id = 6}
             };
 
             Cards = new List<CreditCard>

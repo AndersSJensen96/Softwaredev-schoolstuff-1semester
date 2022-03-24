@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BankAPI.Models.Accounts;
 using BankAPI.Models.Interfaces;
+using BankAPI.Models.Transactions;
 
 namespace BankAPI.Models
 {
@@ -13,19 +14,15 @@ namespace BankAPI.Models
         {
 
         }
-        public Account(string accountNumber, string registerNumber, AccountType type, int owner)
+        public Account(string accountNumber, string registerNumber, AccountType type, int owner, List<ITransaction> transactions)
         {
-            _balance = 0.0;
             AccountNumber = accountNumber;
             RegisterNumber = registerNumber;
             AccountType = type;
             Owner = owner;
+            AccountTransactions = transactions;
         }
         public int Id { get; set; }
-
-        private double _balance;
-
-        public double Balance { get { return _balance; }}
 
         public AccountType AccountType { get; set; }
 
@@ -35,14 +32,11 @@ namespace BankAPI.Models
 
         public int Owner { get; private set; }
 
-        public void Deposit(double amount)
-        {
-            _balance += amount;
-        }
+        public List<ITransaction> AccountTransactions { get; private set; }
 
-        public void Withdraw(double amount)
+        public void AddTransaction(Transaction transaction)
         {
-            _balance -= amount;
+            AccountTransactions.Add(transaction);
         }
     }
 }
