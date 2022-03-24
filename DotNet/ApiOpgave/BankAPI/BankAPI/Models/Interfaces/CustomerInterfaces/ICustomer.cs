@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankAPI.Models.CreditCards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,8 +16,8 @@ namespace BankAPI.Models.Interfaces
 
         public int Phone { get; set; }
 
-        public List<IAccount> Accounts { get;}
+        public List<Account> Accounts { get;}
 
-        public List<ICreditCard> creditCards { get; }
+        public List<CreditCard> creditCards { get; }
     }
 }

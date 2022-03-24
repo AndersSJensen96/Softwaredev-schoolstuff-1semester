@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankAPI.Models.Customers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,8 +10,8 @@ namespace BankAPI.Models.Interfaces
     {
         public string CardNumber { get; }
         public string CVC { get; }
-        public ICustomer Holder { get;}
-        public IAccount BoundAccount { get;}
+        public Customer Holder { get;}
+        public Account BoundAccount { get;}
         public DateTime ExpirationDate { get;}
 
     }
