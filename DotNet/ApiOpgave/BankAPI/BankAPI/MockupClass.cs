@@ -11,9 +11,9 @@ namespace BankAPI
     public class MockupClass
     {
 
-        public List<ICustomer> Customers { get; set; }
-        public List<IAccount> Accounts { get; set; }
-        public List<ICreditCard> Cards { get; set; }
+        public List<Customer> Customers { get; set; }
+        public List<Account> Accounts { get; set; }
+        public List<CreditCard> Cards { get; set; }
 
         public MockupClass()
         {
@@ -22,15 +22,15 @@ namespace BankAPI
 
         private void Seed()
         {
-             Customers = new List<ICustomer>
+             Customers = new List<Customer>
             {
-                new CompanyCustomer("46352178", "TestCompany1", "Company1@mail.com", 14423121){ Id = 1},
-                new CompanyCustomer("13516578", "TestCompany2", "Company2@mail.com", 15431829){ Id = 2},
-                new PrivateCustomer("1212950142", "Torben Jespersen", "Torben@mail.com", 14423121){ Id = 3},
-                new PrivateCustomer("0209950145", "Claus Clausen", "Claus@mail.com", 15431829){ Id = 4}
+                new Customer("TestCompany1", "Company1@mail.com", 14423121, CustomerType.Company){ Id = 1},
+                new Customer( "TestCompany2", "Company2@mail.com", 15431829, CustomerType.Company){ Id = 2},
+                new Customer("Torben Jespersen", "Torben@mail.com", 14423121, CustomerType.Private){ Id = 3},
+                new Customer("Claus Clausen", "Claus@mail.com", 15431829, CustomerType.Private){ Id = 4}
             };
 
-           Accounts = new List<IAccount>
+           Accounts = new List<Account>
             {
                 new Account("814841804189041","243", AccountType.Normal, 1){ Id = 1},
                 new Account("251626345232134","123",AccountType.Normal, 2){ Id = 2},
@@ -40,12 +40,12 @@ namespace BankAPI
                 new Account("123154634562234","975", AccountType.Normal, 4){ Id = 6}
             };
 
-            Cards = new List<ICreditCard>
+            Cards = new List<CreditCard>
             {
-                new VisaCreditCard("807412087142087", "321", Customers.Find(x=>x.Id == 1), Accounts.Find(x=>x.AccountNumber == "814841804189041"), DateTime.Now.AddDays(720)){ Id = 1},
-                new MasterCard("15636223668134", "234", Customers.Find(x=>x.Id == 3), Accounts.Find(x=>x.AccountNumber == "123154634562234"), DateTime.Now.AddDays(720)){ Id = 2},
-                new VisaCreditCard("5235668124", "452", Customers.Find(x=>x.Id == 2), Accounts.Find(x=>x.AccountNumber == "251626345232134"), DateTime.Now.AddDays(720)){ Id = 3},
-                new MasterCard("124254736412", "145", Customers.Find(x=>x.Id == 4), Accounts.Find(x=>x.AccountNumber == "123154634562234"), DateTime.Now.AddDays(720)){ Id = 4}
+                new CreditCard("807412087142087", "321", Customers.Find(x=>x.Id == 1), Accounts.Find(x=>x.AccountNumber == "814841804189041"), DateTime.Now.AddDays(720), CreditCardType.Dankort){ Id = 1},
+                new CreditCard("15636223668134", "234", Customers.Find(x=>x.Id == 3), Accounts.Find(x=>x.AccountNumber == "123154634562234"), DateTime.Now.AddDays(720), CreditCardType.Visa){ Id = 2},
+                new CreditCard("5235668124", "452", Customers.Find(x=>x.Id == 2), Accounts.Find(x=>x.AccountNumber == "251626345232134"), DateTime.Now.AddDays(720), CreditCardType.VisaDankort){ Id = 3},
+                new CreditCard("124254736412", "145", Customers.Find(x=>x.Id == 4), Accounts.Find(x=>x.AccountNumber == "123154634562234"), DateTime.Now.AddDays(720), CreditCardType.VisaDankort){ Id = 4}
             };
         }
 
