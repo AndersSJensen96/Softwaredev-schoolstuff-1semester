@@ -1,0 +1,202 @@
+﻿@page "/Pizza"
+@using PizzaGeddonBlazor.Connection
+@using PizzaGeddonBlazor.Model
+<h3>PizzaCreator</h3>
+<div style="Display:flex; flex-direction:row; justify-content:space-between;">
+	<div style="width:50%">
+		<h2>Create</h2>
+		<form style="display:flex; flex-direction:column;">
+			<label>Name:</label>
+			<input type="text" @bind="NewPizza.Name"/>
+			<label>Price:</label>
+			<input type="number" @bind="NewPizza.Price"/>
+			<label>Toppings:</label>
+			<div class="toppings">
+				@foreach (var topping in Toppings)
+				{
+					<div>
+					<input type="checkbox" value="@topping" @onchange="eventArgs => { AddTopping(NewPizza, topping); }" />
+					<span>@topping.Name</span>
+					</div>
+				}
+			</div>
+			<label>Size:</label>
+			<select @bind="NewPizzaSizeId">
+				@foreach (var size in Sizes)
+				{
+					if(size.Name == "Normal"){
+						<option selected="selected" value="@size.Id">@size.Name</option>
+					}else{
+						<option value="@size.Id">@size.Name</option>
+					}
+				}
+			</select>
+			<label>Type:</label>
+			<select @bind="NewPizzaTypeId">
+				@foreach (var type in Types)
+				{
+					if (type.Name == "Normal")
+					{
+						<option selected="selected" value="@type.Id">@type.Name</option>
+					}
+					else
+					{
+						<option value="@type.Id">@type.Name</option>
+					}
+
+				}
+			</select>
+			<button @onclick="() => CreatePizza(NewPizza)">Create</button>
+		</form>
+	</div>
+	<div  style="width:50%; text-align:center; background-color:rgba(200, 200, 200, 0.5); max-height:500px; overflow:scroll;" >
+		<h2>List of Pizza:</h2>
+		<ul class="pizzas" style="color:darkred; font-size:24px; font-weight:bold;">
+			@foreach (var pizza in Pizzas)
+			{
+				<li style="margin-top:15px;"><span>@pizza.Name</span><button @onclick="()=>SelectPizza(pizza)">Edit</button><button @onclick="()=>DeletePizza(pizza.Id)">Delete</button></li>
+			}
+		</ul>
+	</div>
+	@if(ShowUpdate){
+		<div id="updateBox" style="display:block;width:60%;position:absolute;Top:25%;left:25%;background-color:deeppink;padding:30px;">
+		<button @onclick="()=>{ShowUpdate=false;StateHasChanged();}">X</button>
+		<h2>Update Pizza</h2>
+		<form style="display:flex; flex-direction:column"> 
+			<label>Name:</label>
+			<input type="text" @bind="ChosenPizza.Name" />
+			<label>Price:</label>
+			<input type="number" @bind="ChosenPizza.Price" />
+			<label>Toppings:</label>
+			<div class="toppings">
+				@foreach (var topping in Toppings)
+				{
+					<div>
+					@if (ChosenPizza.Toppings.Exists(x=>x.Id == topping.Id))
+					{
+						<input checked="checked" type="checkbox" value="@topping" @onchange="eventArgs => { AddTopping(ChosenPizza, topping); }" />
+					}else{
+						<input type="checkbox" value="@topping" @onchange="eventArgs => { AddTopping(ChosenPizza, topping); }" />
+					}
+
+					<span>@topping.Name</span>
+					</div>
+				}
+			</div>
+			<label>Size:</label>
+			<select @bind="ChosenPizzaSizeId">
+				@foreach (var size in Sizes)
+				{
+					if (ChosenPizza.Size.Id == size.Id)
+					{
+						<option selected value="@size.Id">@size.Name</option>
+					}else{
+						<option value="@size.Id">@size.Name</option>
+					}
+				}
+			</select>
+			<label>Type:</label>
+			<select @bind="ChosenPizzaTypeId">
+				@foreach (var type in Types)
+				{
+					if(ChosenPizza.Type.Id == type.Id){
+						<option selected="selected" value="@type.Id">@type.Name</option>
+					}
+					else{
+						<option value="@type.Id">@type.Name</option>
+					}
+				}
+			</select>
+			<button @onclick="() => UpdatePizza(ChosenPizza)">Update</button>
+		</form>
+	</div>
+	}
+	
+</div>
+
+@code {
+	private MongoDBConnection connection;
+	public List<Topping> Toppings { get; set; } = new List<Topping>();
+	public List<Size> Sizes { get; set; } = new List<Size>();
+	public List<Model.Type> Types { get; set; } = new List<Model.Type>();
+	public List<Pizza> Pizzas { get; set; } = new List<Pizza>();
+	public Pizza ChosenPizza { get; set; } = new Pizza();
+	public Pizza NewPizza { get; set; } = new Pizza();
+	public string NewPizzaTypeId{ get; set; }
+	public string ChosenPizzaTypeId{ get; set; }
+	public string NewPizzaSizeId{ get; set; }
+	public string ChosenPizzaSizeId{ get; set; }
+	public bool ShowUpdate = false;
+
+	protected override void OnInitialized(){
+		connection = new MongoDBConnection("root", "root");
+
+		connection.ConnectToMongo();
+
+		Pizzas = connection.GetAllPizzas();
+
+		Toppings = connection.GetAllToppings();
+
+		Sizes = connection.GetAllSizes();
+
+		Types = connection.GetAllTypes();
+
+	}
+
+	public void CreatePizza(Pizza pizza){
+		if (!string.IsNullOrWhiteSpace(NewPizzaSizeId))
+			pizza.Size = Sizes.First<Size>(x => NewPizzaSizeId == x.Id);
+		else
+			pizza.Size = Sizes.First<Size>();
+
+		if (!string.IsNullOrWhiteSpace(NewPizzaTypeId))
+			pizza.Type = Types.First<Model.Type>(x => NewPizzaTypeId == x.Id);
+		else
+			pizza.Type = Types.First<Model.Type>();
+
+		connection.CreatePizza(pizza);
+
+		Pizzas = connection.GetAllPizzas();
+
+		StateHasChanged();
+
+	}
+	public void SelectPizza(Pizza pizza){
+		ChosenPizza = pizza;
+		ShowUpdate = true;
+		StateHasChanged();
+	}
+	public void UpdatePizza(Pizza pizza){
+
+		if (!string.IsNullOrWhiteSpace(ChosenPizzaTypeId))
+			pizza.Size = Sizes.First<Size>(x => ChosenPizzaSizeId == x.Id);
+		if(!string.IsNullOrWhiteSpace(ChosenPizzaTypeId))
+			pizza.Type = Types.First<Model.Type>(x => ChosenPizzaTypeId == x.Id);
+
+
+		connection.UpdatePizza(pizza);
+
+		Pizzas = connection.GetAllPizzas();
+
+		ShowUpdate = false;
+
+		StateHasChanged();
+	}
+	public void DeletePizza(string pizzaId){
+
+		if(connection.DeletePizza(pizzaId)){
+			Pizzas.Remove(Pizzas.First<Pizza>(x => x.Id == pizzaId));
+		}
+
+		StateHasChanged();
+
+	}
+	public void AddTopping(Pizza pizza, Topping topping){
+		if(pizza.Toppings.Exists(x => x.Id == topping.Id)){
+			pizza.Toppings.Remove(pizza.Toppings.First(x => x.Id == topping.Id));
+		}else{
+			pizza.Toppings.Add(topping);
+		}
+		StateHasChanged();
+	}
+}

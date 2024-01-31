@@ -1,0 +1,31 @@
+﻿@page "/"
+@using PizzaGeddonBlazor.Connection
+
+<PageTitle>Index</PageTitle>
+
+<h2 style="background-color:red;text-align:center;opacity:0.8;">Databaser:</h2>
+<ul style="background-color:red;text-align:center;opacity:0.8;">
+	@foreach(string db in dbs){
+		<li>@db</li>
+	}
+</ul>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code{
+
+	public List<string> dbs = new List<string>();
+
+	protected override void OnInitialized()
+	{
+		var connection = new MongoDBConnection("root", "root");
+
+		connection.ConnectToMongo();
+
+		dbs = connection.ListDatabases();
+
+		connection = null;
+
+	}
+}
+	

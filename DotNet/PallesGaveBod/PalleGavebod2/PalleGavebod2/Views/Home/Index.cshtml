@@ -1,0 +1,36 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+
+
+@foreach (Gift gift in Model)
+{
+	<div>
+		<h2>@gift.Title</h2>
+		<p>@gift.Description</p>
+		<p>@gift.CreationDate</p>
+		<div>
+			<label>Boy gift:</label>
+			@Html.CheckBox("BoyCheck", gift.BoyGift)
+
+			<label>girl gift:</label>
+
+			@Html.CheckBox("GirlCheck", gift.GirlGift)
+
+		</div>
+
+	</div>
+}
+
+@(await Component.InvokeAsync("GiftCount"))
+<!--Kald ViewComponent med taghelpers (husk at tilføje taghelpers  addTagHelper *, MyWebApp
+	https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-5.0
+	https://www.c-sharpcorner.com/article/viewcomponent-in-asp-net-core/
+	-->
+<!--<vc:Gift-Count></vc:Gift-Count-->
+<!--
+Roller kan tilføjes ved at tilføje .addRoles(noget i den still) før entityframeworkstores i startup
+	derefter inde i din controller, injecter du usermanager og login manager, laver rollerne og linker dem med en bruger med createasync på usermanger (tror jeg)
+	derefter kan du bruge [Authorize="Admin"] til at tilføje authorization til dine objekter, så kun profiler med "Admin" rollen kan tilgå dem
+-->

@@ -1,0 +1,35 @@
+﻿@model PalleGavebod2.Models.Gift
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using (Html.BeginForm("CreateGift", "Admin", FormMethod.Post))
+{
+	@Html.ValidationSummary()
+
+	<div>
+		@Html.LabelFor(x => x.Title)
+		@Html.EditorFor(x => x.Title)
+		@Html.ValidationMessageFor(x => x.Title)
+	</div>
+	<div>
+		@Html.LabelFor(x => x.Description)
+		@Html.EditorFor(x => x.Description)
+		@Html.ValidationMessageFor(x => x.Description)
+	</div>
+	<div>
+		@Html.LabelFor(x => x.BoyGift)
+		@Html.CheckBoxFor(x => x.BoyGift)
+		@Html.ValidationMessageFor(x => x.BoyGift)
+	</div>
+	<div>
+		@Html.LabelFor(x => x.GirlGift)
+		@Html.CheckBoxFor(x => x.GirlGift)
+		@Html.ValidationMessageFor(x => x.GirlGift)
+	</div>
+	<div>
+		<button type="submit">Create gift</button>
+	</div>
+}
+@section Scripts{
+
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

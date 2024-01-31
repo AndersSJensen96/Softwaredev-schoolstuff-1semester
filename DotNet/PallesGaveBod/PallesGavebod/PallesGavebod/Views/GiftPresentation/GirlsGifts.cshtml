@@ -1,0 +1,9 @@
+﻿<h1>Girl gifts</h1>
+@foreach(Gift gift in Model)
+{
+<div>
+	<h2>@gift.Title</h2>
+	<p>@gift.Description</p>
+	<p>@gift.CreationDate</p>
+</div>
+}

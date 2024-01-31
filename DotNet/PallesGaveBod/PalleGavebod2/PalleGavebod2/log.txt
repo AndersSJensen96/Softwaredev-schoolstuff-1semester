@@ -1,0 +1,188 @@
+2020-12-10T12:04:43
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:05:39
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:05:43
+REQUEST:
+POST - /Identity/Account/Logout?returnUrl=%2F
+ContentType: application/x-www-form-urlencoded
+Host: localhost:44307
+RESPONSE:
+Status Code: 302
+
+2020-12-10T12:05:43
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:05:45
+REQUEST:
+GET - /CreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 302
+
+2020-12-10T12:05:45
+REQUEST:
+GET - /Identity/Account/Login?ReturnUrl=%2FCreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:05:50
+REQUEST:
+POST - /Identity/Account/Login?ReturnUrl=%2FCreateGift
+ContentType: application/x-www-form-urlencoded
+Host: localhost:44307
+RESPONSE:
+Status Code: 302
+
+2020-12-10T12:05:52
+REQUEST:
+GET - /CreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:06:01
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:23:07
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:443072020-12-10T12:24:03
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:39:33
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2020-12-10T12:41:09
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:52:59
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:12
+REQUEST:
+GET - /CreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 302
+
+2021-01-09T11:53:12
+REQUEST:
+GET - /Identity/Account/Login?ReturnUrl=%2FCreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:14
+REQUEST:
+POST - /Identity/Account/Login?ReturnUrl=%2FCreateGift
+ContentType: application/x-www-form-urlencoded
+Host: localhost:44307
+RESPONSE:
+Status Code: 302
+
+2021-01-09T11:53:15
+REQUEST:
+GET - /CreateGift
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:32
+REQUEST:
+GET - /GiftPresentation/GirlsGifts
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:34
+REQUEST:
+GET - /Identity/Account/Manage
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:39
+REQUEST:
+GET - /GiftPresentation/GirlsGifts
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:41
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T11:53:42
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+
+2021-01-09T12:25:45
+REQUEST:
+GET - /
+ContentType: Not specified
+Host: localhost:44307
+RESPONSE:
+Status Code: 200
+

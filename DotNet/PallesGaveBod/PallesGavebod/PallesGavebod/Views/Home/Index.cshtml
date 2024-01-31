@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach(Gift gift in Model)
+{
+    <div>
+        <h2>@gift.Title</h2>
+        <p>@gift.Description</p>
+        <p>@gift.CreationDate</p>
+		<div>
+			<label>Boy gift:</label>
+			@Html.CheckBox("BoyCheck", gift.BoyGift)
+
+			<label>girl gift:</label>
+
+			@Html.CheckBox("GirlCheck", gift.GirlGift)
+
+		</div>
+
+			</div>
+}
+
